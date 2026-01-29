@@ -1,0 +1,7 @@
+spring:
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/dbrelatospapelmysql?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Guayaquil
+    username: usrrelatospapelmysql
+    password: Abc123relatos
+    driver-class-name: com.mysql.cj.jdbc.Driver
