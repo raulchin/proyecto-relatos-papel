@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "libro",
@@ -22,13 +23,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_libro")
-    private Long idBook;
+    private Integer idBook;
 
     @Column(name = "titulo", nullable = false)
     private String title;
 
     @Column(name = "fecha_publicacion")
-    private Date datePublication;
+    private LocalDate datePublication;
 
     @Column(name = "isbn")
     private String isbn;

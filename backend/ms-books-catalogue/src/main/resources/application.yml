@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8999
 
 spring:
   application:
@@ -30,3 +30,4 @@ logging:
   level:
     com.netflix.discovery: DEBUG
     org.springframework.cloud.netflix.eureka: DEBUG
+#    org.springframework.web: DEBUG
