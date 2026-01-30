@@ -3,12 +3,12 @@ spring:
   application:
     name: ms-gateway
   profile:
-    default: default
+    default: eureka-on
 server:
   port: 4040
 
 eureka:
   client:
-    fetch-registry: false
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
