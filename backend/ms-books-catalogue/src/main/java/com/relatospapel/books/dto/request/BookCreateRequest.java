@@ -9,8 +9,8 @@ public record BookCreateRequest(
         String description,
         Integer assessment,
         Boolean visibility,
-        Integer editorial,
-        Integer author
+        Integer editorialId,
+        Integer authorId
 
 ) {
 }

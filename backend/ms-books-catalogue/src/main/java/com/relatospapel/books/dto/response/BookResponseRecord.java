@@ -1,9 +1,8 @@
-package com.relatospapel.books.dto;
+package com.relatospapel.books.dto.response;
 
 import java.math.BigDecimal;
 
-
-public record BookDtoRecord(
+public record BookResponseRecord(
         Integer idBook,
         String title,
         java.time.LocalDate datePublication,
