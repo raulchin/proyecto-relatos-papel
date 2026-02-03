@@ -1,20 +1,22 @@
+
 server:
-  port: 8999
+  port: 8998
 
 spring:
   application:
-    name: ms-books-catalogue
-
+    name: ms-books-payments
   datasource:
-    url: jdbc:mysql://localhost:3307/dbrelatospapelmysql?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Guayaquil
-    username: usrrelatospapelmysql
+    url: jdbc:postgresql://localhost:5433/dbrelatospapel
+    username: usrrelatospapel
     password: Abc123relatos
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 eureka:
   instance:
@@ -32,7 +34,6 @@ logging:
   level:
     com.netflix.discovery: DEBUG
     org.springframework.cloud.netflix.eureka: DEBUG
-
 springdoc:
   swagger-ui:
     path: /swagger
