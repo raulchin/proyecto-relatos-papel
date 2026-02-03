@@ -2,6 +2,7 @@ package com.relatospapel.books.controller;
 
 import com.relatospapel.books.common.LogService;
 import com.relatospapel.books.dto.request.BookCreateRequest;
+import com.relatospapel.books.dto.request.StockUpdateRequest;
 import com.relatospapel.books.dto.response.BookResponseRecord;
 import com.relatospapel.books.entity.Book;
 import com.relatospapel.books.mapper.Mapper;
@@ -19,16 +20,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-
 @RestController
-@RequestMapping("/v1/books")
-@Tag(name = "Book Controller",
-        description = "All CRUD operations for Book service and many APIs to be used by other micro-services")
+@RequestMapping("/api/v1/books")
+@Tag(name = "Controlador de libros",
+        description = "Todas las operaciones CRUD del servicio libro y muchas API para que las utilicen otros microservicios")
 @Slf4j
 public class BookController {
-
-    private static final String KEY = "uuid";
 
     @Autowired
     BookService bookService;
@@ -39,8 +36,8 @@ public class BookController {
     @Autowired
     LogService logService;
 
-    @Operation(summary = "Add new book", description = "Add new book")
-    @ApiResponses(value = {@ApiResponse(responseCode = "201")})
+    @Operation(summary = "Agregar nuevo libro", description = "Agregar nuevo libro")
+    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Transaccion exitosa")})
     @PostMapping
     public ResponseEntity<BookResponseRecord> addBook(@RequestBody BookCreateRequest request){
 
@@ -51,33 +48,53 @@ public class BookController {
 
     }
 
-    @Operation(summary = "Get a book", description = "Get a book")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation")})
+    @Operation(summary = "Buscar un libro segun su id", description = "Buscar un libro segun su id")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Transaccion exitosa")})
     @GetMapping("/{id}")
-    public ResponseEntity<BookResponseRecord> getBook(@Parameter(description = "ID of book to be retrieved",
+    public ResponseEntity<BookResponseRecord> findBookById(@Parameter(description = "ID del libro a recuperar",
             required = true) @PathVariable int id) {
 
         log.info("Obtener un libro segun si id: {}",id);
-        return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
+        return new ResponseEntity<>(bookService.findBookById(id), HttpStatus.OK);
 
     }
 
-    @Operation(summary = "Get all book", description = "Get all books")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation")})
+    @Operation(summary = "Obtener todos los libros", description = "Obtener todos los libros")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Transaccion exitosa")})
     @GetMapping
-    public ResponseEntity<List<BookResponseRecord>> getAllBook() {
+    public ResponseEntity<List<BookResponseRecord>> findAllBook() {
 
         log.info("Obtener todos los libros regitrados...");
-        return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
+        return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
 
     }
 
-    @Operation(summary = "Delete a book", description = "Delete a book")
-    @ApiResponses(value = {@ApiResponse(responseCode = "204")})
+    @Operation(summary = "Eliminar un libro", description = "Eliminar un libro")
+    @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "Transaccion exitosa")})
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBookById(@PathVariable int id) {
         log.info("Proceso para eliminar un libro con el id: {}",id);
         bookService.deleteBookById(id);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "Editar un libro", description = "Permite editar un libro")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200")})
+    @PutMapping("/{id}")
+    public ResponseEntity<BookResponseRecord> updateBook(@RequestBody BookCreateRequest req,
+                                              @Parameter(description = "ID del libro a actualizar",
+                                                      required = true) @PathVariable int id) {
+        return new ResponseEntity<>(bookService.updateBook(req, id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Actualizar el stock del libro", description = "Actualizar el stock del libro")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200")})
+    @PatchMapping("/{id}")
+    public ResponseEntity<BookResponseRecord> updateStock(
+            @PathVariable int id,
+            @RequestBody StockUpdateRequest request
+    ) {
+        return ResponseEntity.ok(bookService.updateStock(id, request));
+    }
+
 }
