@@ -18,8 +18,9 @@ spring:
 
 eureka:
   instance:
-    prefer-ip-address: true
-    instance-id: "${spring.application.name}:${random.value}"
+    hostname: localhost
+    prefer-ip-address: false
+    #instance-id: "${spring.application.name}:${random.value}"
   client:
     register-with-eureka: true
     fetch-registry: true
@@ -31,7 +32,7 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{uuid} - %msg%n"
   level:
     com.netflix.discovery: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
+    #org.springframework.cloud.netflix.eureka: DEBUG
 
 springdoc:
   swagger-ui:

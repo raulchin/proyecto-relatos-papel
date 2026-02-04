@@ -29,11 +29,32 @@ public class OrderEntity {
     @Column(name = "fecha_pedido", nullable = false)
     private OffsetDateTime orderDate;
 
+    @Column(name = "estado_pedido", length = 20)
+    private String statusOrder;
+
+    @Column(name = "estado_pago", length = 20)
+    private String statusPayment;
+
+    @Column(name = "estado_envio", length = 20)
+    private String statusShipment;
+
     @Column(name = "subtotal", nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
+    @Column(name = "descuento_total", nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalDiscount;
+
+    @Column(name = "impuestos", nullable = false, precision = 10, scale = 2)
+    private BigDecimal tax;
+
+    @Column(name = "costo_envio", nullable = false, precision = 10, scale = 2)
+    private BigDecimal shippingCost;
+
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
+
+    @Column(name = "moneda", length = 3)
+    private String currency;
 
     @Column(name = "metodo_pago", length = 50)
     private String paymentMethod;

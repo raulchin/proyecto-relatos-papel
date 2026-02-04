@@ -32,8 +32,10 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{uuid} - %msg%n"
   level:
-    com.netflix.discovery: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
+    #com.netflix.discovery: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
+    #org.springframework.cloud.netflix.eureka: DEBUG
 springdoc:
   swagger-ui:
     path: /swagger
