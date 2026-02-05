@@ -25,7 +25,8 @@ public class Mapper {
             throw new NullPointerException("The Book should not be null");
         }
         return new BookResponseRecord(book.getIdBook(),book.getTitle(),
-                book.getDatePublication(),book.getIsbn(),book.getPrice(),book.getStock(),book.getDescription());
+                book.getDatePublication(),book.getIsbn(),book.getPrice(),
+                book.getStock(),book.getDescription(), book.getVisibility());
     }
 
     public Book bookCreateRequestToBook(BookCreateRequest createRequest){

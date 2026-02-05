@@ -1,4 +1,4 @@
-package com.relatospapel.msgateway.beans;
+package com.relatospapel.msgateway.config;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -16,7 +16,12 @@ public class GatewayBeans {
                 .route("books", route -> route
                         .path("/api/v1/books", "/api/v1/books/**")
                         .uri("http://127.0.0.1:8999")
-                ).build();
+                )
+                .route("orders", order -> order
+                        .path("/api/v1/orders", "/api/v1/orders/**")
+                        .uri("http://127.0.0.1:8998")
+                )
+                .build();
     }
 
 

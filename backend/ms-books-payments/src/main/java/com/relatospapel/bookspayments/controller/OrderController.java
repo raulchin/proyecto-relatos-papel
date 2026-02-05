@@ -1,7 +1,7 @@
 package com.relatospapel.bookspayments.controller;
 
 
-import com.relatospapel.bookspayments.dto.BookResponse;
+
 import com.relatospapel.bookspayments.dto.OrderDto;
 import com.relatospapel.bookspayments.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderDto> addOrder(@Validated @RequestBody OrderDto orderDto) {
-        log.info("Metodo para registrar una orden ");
+        log.info("Metodo para registrar una orden...");
         return new ResponseEntity<>(paymentService.addOrder(orderDto), HttpStatus.CREATED);
     }
 

@@ -9,6 +9,7 @@ public record BookResponseRecord(
         String isbn,
         BigDecimal price,
         int stock,
-        String description
+        String description,
+        Boolean visible
 ) {
 }

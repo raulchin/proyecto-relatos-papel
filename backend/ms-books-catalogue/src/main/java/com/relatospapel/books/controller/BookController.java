@@ -89,11 +89,12 @@ public class BookController {
 
     @Operation(summary = "Actualizar el stock del libro", description = "Actualizar el stock del libro")
     @ApiResponses(value = {@ApiResponse(responseCode = "200")})
-    @PatchMapping("/{id}")
-    public ResponseEntity<BookResponseRecord> updateStock(
+    @PostMapping("/{id}")
+    public ResponseEntity<BookResponseRecord> updateBookQuantity(
             @PathVariable int id,
             @RequestBody StockUpdateRequest request
     ) {
+        log.info("Actualizar la cantidad del libro, dependiendo si es venta/compra : {}",request.operation().name());
         return ResponseEntity.ok(bookService.updateStock(id, request));
     }
 
